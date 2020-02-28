@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="recipeForm" (submit)="onSave()">
+      <!-- Title -->
+      <mat-form-field>
+        <input matInput type="text" formControlName="title" placeholder="Title">
+        <mat-error *ngIf="recipeForm.get('title').invalid">Title required</mat-error>
+      </mat-form-field>
+      <!-- Description -->
+      <mat-form-field>
+        <input matInput type="text" formControlName="description" placeholder="Description">
+        <mat-error *ngIf="recipeForm.get('description').invalid">Description required</mat-error>
+      </mat-form-field>
+
+      <!-- image -->
+      <div>
+          <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+      </div>
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && recipeForm.get('image').valid">
+          <img [src]="imagePreview" [alt]="recipeForm.value.title">
+      </div>
+
+      <!-- Dropdown Selector Ingredient -->
+      <div>
+        <select formControlName="selector_ingredient">
+          <option value=""disabled>Select ingredient</option>
+          <option *ngFor="let ingredient of ingredients" [value]="ingredient.name">
+            {{ingredient.name}}
+          </option>
+        </select>
+        <button type="button" (click)="addIngredient()">
+          Add ingredient</button>
+      </div>
+      <!-- stocked_ingredients Array of Objects -->
+      <div formArrayName="stocked_ingredients">
+        <div *ngFor="let item of stocks; let i = index;">
+          <div [formGroupName]="i">
+            <div>
+              {{item.value.name}}
+            </div>
+            <input type="number" formControlName="amount">
+            <input type="test" formControlName="amountType">
+            <button type="button" (click)="onRemove(item, i)">Remove</button>
+          </div>
+        </div>
+
+      </div>
+      <!-- Create or Update form -->
+      <div>
+        <button type="submit" [disabled]="recipeForm.invalid">Save</button>
+      </div>
+      <pre>{{ recipeForm.value | json }}</pre>
+    </form>
+  </mat-card-content>
+</mat-card>
