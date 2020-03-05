@@ -29,7 +29,7 @@ export abstract class CrudService<T> {
    * @param object pass the value to create new object
    */
   public createObject(object: T): Observable<T> {
-    return this.apiService.post(`${this.url}`, object);
+    return this.apiService.post(`${this.url}/`, object);
   }
 
   /**

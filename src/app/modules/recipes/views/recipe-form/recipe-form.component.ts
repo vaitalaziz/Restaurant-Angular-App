@@ -22,7 +22,6 @@ interface Ingredient {
 export class RecipeFormComponent implements OnInit {
   imagePreview: string;
   ingredients: Ingredient[] = [
-    { id: -1, name: 'Select ingredient' },
     { id: 111, name: 'chicken' },
     { id: 222, name: 'beef' }
   ];

@@ -48,13 +48,9 @@ export class ApiService {
    * Here tying to append File so ..
    */
   public post(url: string, body: any= {}): Observable<any> {
-    console.log('I am knocked');
-    const postData = new FormData();
-    postData.append('title', body.title);
-    postData.append('description', body.description);
-    postData.append('stocked_ingredients', body.stocked_ingredients);
-    postData.append('image', body.image);
-    return this.http.post(`${environment.baseUrl}${url}`, postData)
+    console.log('API kicked');
+    console.log(`${environment.baseUrl}${url}`);
+    return this.http.post(`${environment.baseUrl}${url}`, body)
       .pipe(
         map((res) => {
           return res;

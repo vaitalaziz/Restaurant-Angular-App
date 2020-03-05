@@ -8,6 +8,7 @@ export class RecipeService extends CrudService<Recipe> {
   constructor(
     protected apiService: ApiService
   ) {
-    super(apiService, 'api/post');
+    // super(apiService, 'api/post');
+    super(apiService, 'v1/recipes');
   }
 }
